@@ -1,1 +1,33 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio
 .vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# OS generated files
+[Tt]humbs.db
+[Dd]esktop.ini
+*.DS_Store
+
+# Logs
+*.log
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Other generated files
+*.pdb
+*.dll
+*.exe
