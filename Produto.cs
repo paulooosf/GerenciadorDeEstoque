@@ -1,11 +1,11 @@
 ﻿class Produto
 {
-    string Nome { get; set; }
-    double Preco { get; set; }
-    string Descricao { get; set; }
-    int Quantidade { get; set; }
+    public string Nome { get; set; }
+    public double Preco { get; set; }
+    public string Descricao { get; set; }
+    public int Quantidade { get; set; }
 
-    public Produto (string nome, double preco, string descricao, int quantidade)
+    public Produto(string nome, double preco, string descricao, int quantidade)
     {
         this.Nome = nome;
         this.Preco = preco;
@@ -18,7 +18,7 @@
         if (numero <= 0)
         {
             throw new ArgumentNullException("Defina uma quantidade correta!");
-        } 
+        }
         this.Quantidade += numero;
     }
 
@@ -29,5 +29,13 @@
             throw new ArgumentNullException("Defina uma quantidade correta!");
         }
         this.Quantidade -= numero;
+    }
+
+    public void ExibirInformacoes()
+    {
+        Console.WriteLine($"\nProduto: {Nome}:");
+        Console.WriteLine($"Preço: {Preco}");
+        Console.WriteLine($"Descrição: {Descricao}");
+        Console.WriteLine($"Quantidade: {Quantidade}");
     }
 }
