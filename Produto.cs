@@ -33,7 +33,7 @@
 
     public void ExibirInformacoes()
     {
-        Console.WriteLine($"\nProduto: {Nome}:");
+        Console.WriteLine($"\nProduto: {Nome}");
         Console.WriteLine($"Preço: {Preco}");
         Console.WriteLine($"Descrição: {Descricao}");
         Console.WriteLine($"Quantidade: {Quantidade}");
