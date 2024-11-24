@@ -21,4 +21,14 @@
             }
         }
     }
+
+    public Produto ResgatarProduto(string nome)
+    {
+        return ListaProdutos.FirstOrDefault(p => p.Nome == nome);
+    }
+
+    public void CadastrarProduto(Produto produto)
+    {
+        ListaProdutos.Add(produto);
+    }
 }
