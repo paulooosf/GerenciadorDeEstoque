@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 class Menu
 {
     public static void MenuPrincipal(Estoque estoque)
     {
         Console.WriteLine("\n============================================");
         Console.WriteLine("Bem vindo ao gerenciamento de estoque!");
-        Console.WriteLine("Selecione uma opção:");
+        Console.WriteLine("\nSelecione uma opção:\n");
         Console.WriteLine("1 - Visualizar produtos no estoque");
         Console.WriteLine("2 - Adicionar estoque de produtos");
         Console.WriteLine("3 - Remover estoque de produtos");
@@ -18,7 +17,9 @@ class Menu
 
         switch(opcao)
         {
-            case 1: 
+            case 1:
+                Console.WriteLine("\n============================================");
+                Console.WriteLine("Listando produtos:");
                 estoque.ListarProdutos();
                 MenuPrincipal(estoque);
                 break;
@@ -36,7 +37,7 @@ class Menu
                 Environment.Exit(0);
                 break;
             default:
-                Console.WriteLine("\nDigite uma opção válida!");
+                Console.WriteLine("\n[!!] Digite uma opção válida!");
                 MenuPrincipal(estoque);
                 break;
         }
@@ -44,55 +45,55 @@ class Menu
 
     public static void MenuAdicionar(Estoque estoque)
     {
-        Console.WriteLine("\n======================");
+        Console.WriteLine("\n============================================");
         Console.WriteLine("Produtos disponíveis: ");
         estoque.ListarProdutos();
         Console.Write("\nQual produto você deseja adicionar? ");
         var nome = Console.ReadLine();
-
-        var produto = estoque.ListaProdutos.FirstOrDefault(p => p.Nome == nome);
+        var produto = estoque.ResgatarProduto(nome);
 
         if (produto != null)
         {
             Console.Write("\nQual a quantidade que você deseja adicionar? ");
             int quantidade = int.Parse(Console.ReadLine());
+
             if (quantidade <= 0)
             {
-                Console.WriteLine("Digite uma quantidade válida!");
+                Console.WriteLine("\n[!!] Digite uma quantidade válida!");
                 MenuAdicionar(estoque);
             }
             else
             {
                 produto.AdicionarQuantidade(quantidade);
-                Console.WriteLine($"Você adicionou {quantidade} produtos do tipo {produto.Nome}!");
+                Console.WriteLine($"\nVocê adicionou {quantidade} produtos do tipo {produto.Nome}!");
                 MenuPrincipal(estoque);
             }
         }
         else
         {
-            Console.WriteLine("Produto não encontrado!");
+            Console.WriteLine("\n[!!] Produto não encontrado!");
             MenuAdicionar(estoque);
         }
     }
 
     public static void MenuRemover(Estoque estoque)
     {
-        Console.WriteLine("\n======================");
+        Console.WriteLine("\n============================================");
         Console.WriteLine("Produtos disponíveis: ");
         estoque.ListarProdutos();
         Console.Write("\nQual produto você deseja remover? ");
         var nome = Console.ReadLine();
-
-        var produto = estoque.ListaProdutos.FirstOrDefault(p => p.Nome == nome);
+        var produto = estoque.ResgatarProduto(nome);
 
         if (produto != null)
         {
             Console.Write("\nQual a quantidade que você deseja remover? ");
             int quantidade = int.Parse(Console.ReadLine());
+
             if (quantidade <= 0)
             {
-                Console.WriteLine("Digite uma quantidade válida!");
-                MenuAdicionar(estoque);
+                Console.WriteLine("\n[!!] Digite uma quantidade válida!");
+                MenuRemover(estoque);
             }
             else
             {
@@ -103,32 +104,33 @@ class Menu
         }
         else
         {
-            Console.WriteLine("Produto não encontrado!");
-            MenuAdicionar(estoque);
+            Console.WriteLine("\n[!!] Produto não encontrado!");
+            MenuRemover(estoque);
         }
     }
 
     public static void MenuCadastro(Estoque estoque)
     {
-        Console.WriteLine("\n========================");
+        Console.WriteLine("\n============================================");
         Console.WriteLine("Cadastro de produtos");
-        Console.Write("Digite o nome do produto: ");
+        Console.Write("\nDigite o nome do produto: ");
         var nome = Console.ReadLine();
-        Console.Write("\nDigite o preço do produto: ");
+        Console.Write("Digite o preço do produto: ");
         var preco = double.Parse(Console.ReadLine());
-        Console.Write("\nDigite uma descrição para o produto: ");
+        Console.Write("Digite uma descrição para o produto: ");
         var descricao = Console.ReadLine();
-        Console.Write("\nVocê deseja incluir uma quantidade do produto? (S/N) ");
+        Console.Write("Você deseja incluir uma quantidade do produto? (S/N) ");
         var opcao = Console.ReadLine();
         var quantidade = 0;
+
         if (opcao == "S" || opcao == "s")
         {
-            Console.Write("\nDigite a quantidade do produto: ");
+            Console.Write("Digite a quantidade do produto: ");
             quantidade = int.Parse(Console.ReadLine());
         }
 
         var produto = new Produto(nome, preco, descricao, quantidade);
-        estoque.ListaProdutos.Add(produto);
+        estoque.CadastrarProduto(produto);
 
         Console.WriteLine("\nProduto cadastrado! Listando informações:");
         produto.ExibirInformacoes();
